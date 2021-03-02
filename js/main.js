@@ -78,3 +78,4 @@ function selectCurrentChat(chatId) {
     print();
 }
 
+// comment
