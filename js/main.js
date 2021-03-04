@@ -16,6 +16,11 @@ const message = new Message('Hello, are you listening?!', user1.username);
 currentChat.addMessage(message);
 
 document.getElementById('new-chat-button').addEventListener('click', addNewChat);
+document.getElementById('new-chat-input').addEventListener('keydown', (event) => {
+if(event.key == 'Enter') {
+    addNewChat();
+}
+});
 
 print();
 
@@ -53,6 +58,7 @@ function print() {
         <div>
         <label for="${user.username}"></label>
         <input id="${user.username}">
+        <button onclick='addNewMessage("${currentChat.id}", "${user.username}")' class = "btn btn-primary"></button>
         </div>`;
     });
     document.getElementById('users').innerHTML = usersHtml;
@@ -65,13 +71,21 @@ function addNewChat() {
         const newChat = new Chat(chatName);
         // add chat to chats
         chats[newChat.id] = new Chat;
-        // cleat out the input box
+        // clear out the input box
         document.getElementById('new-chat-input').value = '';
         // print again
         print();
 
     }
 }
+
+function addNewMessage (chatId, username) {
+    const text = document.getElementById(username).value;
+    const newMessage = new Message(text, username);
+    chats[shatId].addMessage(newMessage);
+    print();
+}
+
 function selectCurrentChat(chatId) {
     currentChat = chats[chatId];
     // print again
